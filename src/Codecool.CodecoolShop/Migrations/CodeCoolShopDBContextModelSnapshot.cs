@@ -52,17 +52,7 @@ namespace Codecool.CodecoolShop.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Currency = "USD",
-                            DefaultPrice = 479.0m,
-                            Name = "Lenovo IdeaPad Miix 700",
-                            ProductCategory = 0
-                        });
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Codecool.CodecoolShop.Models.Supplier", b =>
@@ -81,7 +71,7 @@ namespace Codecool.CodecoolShop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("Codecool.CodecoolShop.Models.Product", b =>

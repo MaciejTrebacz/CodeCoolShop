@@ -51,10 +51,16 @@ namespace Codecool.CodecoolShop.Controllers
             {
                 Debug.WriteLine("Created new cart");
                 cart = new ShoppingCart();
-                HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
+                SaveCart(cart);
             }
 
             return cart;
+        }
+
+        private void SaveCart(ShoppingCart cart)
+        {
+            Debug.WriteLine("Saved cart");
+            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
         }
     }
 }

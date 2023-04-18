@@ -12,6 +12,7 @@ public class CodeCoolShopDBContext : DbContext
 
     public DbSet<Product> Products { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<LineItem> LineItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

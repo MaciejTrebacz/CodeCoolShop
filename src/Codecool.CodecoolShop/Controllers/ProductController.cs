@@ -44,6 +44,15 @@ namespace Codecool.CodecoolShop.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult AddToCart(int productId)
+        {
+            var cart = GetCart();
+            cart.Items.TryGetValue(productId, out var currentCount);
+            cart.Items[productId] = currentCount + 1;
+            SaveCart(cart);
+            return Redirect("/");
+        }
+
         private ShoppingCart GetCart()
         {
             ShoppingCart cart;

@@ -66,6 +66,7 @@ namespace Codecool.CodecoolShop.Controllers
         {
             Debug.WriteLine("Saved cart");
             HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
+        }
 
         public IActionResult Sort()
         {

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Codecool.CodecoolShop.Models
 {
     public class Product : BaseModel
@@ -8,6 +6,6 @@ namespace Codecool.CodecoolShop.Models
         public decimal DefaultPrice { get; set; }
         public ProductCategory ProductCategory { get; set; }
         public Supplier Supplier { get; set; }
-
+        public string Image { get; set; }
     }
 }

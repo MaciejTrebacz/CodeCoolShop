@@ -60,7 +60,9 @@ public class CodeCoolShopSeed
 
                 var supplierFaker = new Faker<Supplier>()
                     .RuleFor(p => p.Name, f => f.Company.CompanyName())
-                    .RuleFor(p => p.Description, f => f.Company.CompanySuffix());
+                    .RuleFor(p => p.Description, f => f.Lorem.Sentence(5));
+
+                var supplierList = supplierFaker.Generate(10);
 
                 var productFaker = new Faker<Product>()
                     .RuleFor(p => p.Name, f => f.Commerce.ProductName())
@@ -68,7 +70,8 @@ public class CodeCoolShopSeed
                     .RuleFor(p => p.DefaultPrice, f => f.Random.Decimal(50, 1000))
                     .RuleFor(p => p.ProductCategory, f => (ProductCategory)f.Random.Int(0, 2))
                     .RuleFor(p => p.Description, f => f.Lorem.Sentence(5))
-                    .RuleFor(p => p.Supplier, f => supplierFaker.Generate());
+                    .RuleFor(p => p.Supplier, f => supplierList[f.Random.Int(0, supplierList.Count - 1)])
+                    .RuleFor(p => p.Image, f => f.Random.Int(1, 20).ToString());
 
 
                 var products = productFaker.Generate(100);

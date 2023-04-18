@@ -41,7 +41,19 @@ namespace Codecool.CodecoolShop.Controllers
 
         private ShoppingCart GetCart()
         {
-            var cart = HttpContext.Session.Get("Cart") != null ? JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart")) : new ShoppingCart();
+            ShoppingCart cart;
+            if (HttpContext.Session.Get("Cart") != null)
+            {
+                Debug.WriteLine("Found existing cart");
+                cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
+            }
+            else
+            {
+                Debug.WriteLine("Created new cart");
+                cart = new ShoppingCart();
+                HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
+            }
+
             return cart;
         }
     }

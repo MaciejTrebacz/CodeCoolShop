@@ -1,11 +1,16 @@
-﻿using Codecool.CodecoolShop.Models;
+using System;
+using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
+using System.Text.Json;
+using Codecool.CodecoolShop.Logic;
+using Microsoft.AspNetCore.Http;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -23,6 +28,7 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Index()
         {
+            var cart = GetCart();
             var model = _productService.GetProducts();
             return View(model);
         }
@@ -37,6 +43,29 @@ namespace Codecool.CodecoolShop.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        private ShoppingCart GetCart()
+        {
+            ShoppingCart cart;
+            if (HttpContext.Session.Get("Cart") != null)
+            {
+                Debug.WriteLine("Found existing cart");
+                cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
+            }
+            else
+            {
+                Debug.WriteLine("Created new cart");
+                cart = new ShoppingCart();
+                SaveCart(cart);
+            }
+
+            return cart;
+        }
+
+        private void SaveCart(ShoppingCart cart)
+        {
+            Debug.WriteLine("Saved cart");
+            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
 
         public IActionResult Sort()
         {

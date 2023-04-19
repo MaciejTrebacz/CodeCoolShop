@@ -7,13 +7,24 @@
 
 <h1>Shopping Cart</h1>
 <table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price per unit</th>
+        <th>Currency</th>
+        <th>Subtotal</th>
+    </tr>
     @foreach (var element in Model.Products)
     {
         <tr>
             <td>@element.Name</td>
+            <td>@Model.Cart.Items[element.Id]</td>
             <td>@element.DefaultPrice</td>
             <td>@element.Currency</td>
+            <td>@(element.DefaultPrice * Model.Cart.Items[element.Id])</td>
         </tr>
     }
+    
+
 </table>
 

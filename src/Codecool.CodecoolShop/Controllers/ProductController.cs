@@ -1,4 +1,3 @@
-using System;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,9 @@ using Codecool.CodecoolShop.Logic;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
 using System.Threading.Tasks;
+using Codecool.CodecoolShop.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Codecool.CodecoolShop.Controllers
@@ -20,10 +22,11 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ProductService _productService;
         private readonly SupplierService _supplierService;
 
-        public ProductController(ILogger<ProductController> logger, ProductService productService)
+        public ProductController(ILogger<ProductController> logger, ProductService productService, SupplierService supplierService)
         {
             _logger = logger;
             _productService = productService;
+            _supplierService = supplierService;
         }
 
         public IActionResult Index()
@@ -81,7 +84,13 @@ namespace Codecool.CodecoolShop.Controllers
         {
             var model = new ProductViewModel
             {
-                Products = _productService.GetProducts()
+                Products = _productService.GetProducts(),
+                Suppliers = _supplierService.GetAllAsync().Result
+                    .Select(s => new SelectListItem
+                    {
+                        Value = s.Id.ToString(),
+                        Text = s.Name
+                    })
             };
 
             return View(model);
@@ -89,7 +98,7 @@ namespace Codecool.CodecoolShop.Controllers
 
 
         [HttpPost]
-        public IActionResult Sort(ProductCategory? productCategory)
+        public IActionResult Sort(ProductCategory? productCategory,int? supplierId)
         {
             var products = _productService.GetProducts();
             if (productCategory.HasValue)
@@ -97,19 +106,25 @@ namespace Codecool.CodecoolShop.Controllers
                 products = products.Where(p => p.ProductCategory == productCategory.Value).ToList();
             }
 
+            if (supplierId.HasValue)
+            {
+                products = products.Where(p=>p.Supplier.Id == supplierId.Value).ToList();
+            }
+
             var model = new ProductViewModel
             {
                 ProductCategory = productCategory,
-                Products = products
+                SupplierId = supplierId,
+                Products = products,
+                Suppliers = _supplierService.GetAllAsync().Result
+                    .Select(s => new SelectListItem
+                    {
+                        Value = s.Id.ToString(),
+                        Text = s.Name
+                    })
             };
 
             return View(model);
-        }
-
-
-        public async Task<IActionResult> SortBySupplier()
-        {
-            return View();
         }
     }
 }

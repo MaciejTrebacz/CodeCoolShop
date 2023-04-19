@@ -1,14 +1,26 @@
-﻿@model Codecool.CodecoolShop.Models.ProductViewModel
+﻿@using Codecool.CodecoolShop.Services
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Codecool.CodecoolShop.Models.ProductViewModel
 
 
 <form method="post" asp-controller="Product" asp-action="Sort">
-    <div class="form-group">
-        <label asp-for="ProductCategory">ProductCategory</label>
-        <select asp-for="ProductCategory" class="form-control" asp-items="@Html.GetEnumSelectList<ProductCategory>()">
-            <option>--Select--</option>
-        </select>
+        <div class="form-group">
+            <label asp-for="ProductCategory">ProductCategory</label>
+            <select asp-for="ProductCategory" class="form-control" asp-items="@Html.GetEnumSelectList<ProductCategory>()">
+                <option>--Select Product--</option>
+            </select>
+
+        <div class="form-group">
+            <label>Supplier</label>
+            <select asp-for="SupplierId" asp-items="@Model.Suppliers" class="form-control">
+                <option>--Select Supplier--</option>
+
+            </select>
+        </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
+
+
 
     </div>
 </form>
@@ -33,7 +45,7 @@
                     <p class="card-text">Category: @element.ProductCategory</p>
                     <p class="card-text">Supplier: @element.Supplier.Name</p>
                     <p class="card-text text-center"><strong>Price: @element.DefaultPrice.ToString("C2")</strong></p>
-                    <a href="" type="button" class="btn btn-primary" style="float: bottom">Add To Cart</a>
+                    <a href="" type="button" class="btn btn-primary" style="">Add To Cart</a>
                 </div>
             </div>
         </div>

@@ -26,6 +26,7 @@ namespace Codecool.CodecoolShop
                 options.UseSqlServer(Configuration.GetConnectionString("CodeCoolShop")));
             services.AddScoped<CodeCoolShopSeed>();
             services.AddScoped<ProductService>();
+            services.AddScoped<SupplierService>();
             services.AddDistributedMemoryCache();
             services.AddSession();
         }

@@ -14,17 +14,25 @@
         <th>Currency</th>
         <th>Subtotal</th>
     </tr>
-    @foreach (var element in Model.Products)
+    @if (Model.Products.Count > 0)
+    {
+        @foreach (var element in Model.Products)
+        {
+            <tr>
+                <td>@element.Name</td>
+                <td>@Model.Cart.Items[element.Id]</td>
+                <td>@element.DefaultPrice</td>
+                <td>@element.Currency</td>
+                <td>@(element.DefaultPrice * Model.Cart.Items[element.Id])</td>
+            </tr>
+        }
+    }
+    else
     {
         <tr>
-            <td>@element.Name</td>
-            <td>@Model.Cart.Items[element.Id]</td>
-            <td>@element.DefaultPrice</td>
-            <td>@element.Currency</td>
-            <td>@(element.DefaultPrice * Model.Cart.Items[element.Id])</td>
+            <td align="center" colspan="5">No items in cart</td>
         </tr>
     }
-    
-
 </table>
+<a type="button" class="btn btn-primary @(Model.Products.Count == 0 ? "disabled" : "")" style="float: right" asp-controller="Product" asp-action="Index">Checkout</a>
 

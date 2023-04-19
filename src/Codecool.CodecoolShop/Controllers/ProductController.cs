@@ -111,5 +111,11 @@ namespace Codecool.CodecoolShop.Controllers
         {
             return View();
         }
+
+        public IActionResult ViewCart()
+        {
+            var cart = GetCart();
+            return View();
+        }
     }
 }

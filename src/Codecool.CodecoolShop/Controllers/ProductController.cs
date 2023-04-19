@@ -51,7 +51,7 @@ namespace Codecool.CodecoolShop.Controllers
             cart.Items.TryGetValue(productId, out var currentCount);
             cart.Items[productId] = currentCount + 1;
             SaveCart(cart);
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewCart");
         }
 
         private ShoppingCart GetCart()

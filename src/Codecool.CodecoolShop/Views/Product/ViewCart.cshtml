@@ -1,7 +1,19 @@
 ﻿
 @{
-    ViewData["Title"] = "ViewCart";
+    ViewData["Title"] = "Shopping Cart";
 }
 
-<h1>ViewCart</h1>
+@model CartViewModel
+
+<h1>Shopping Cart</h1>
+<table class="table">
+    @foreach (var element in Model.Products)
+    {
+        <tr>
+            <td>@element.Name</td>
+            <td>@element.DefaultPrice</td>
+            <td>@element.Currency</td>
+        </tr>
+    }
+</table>
 

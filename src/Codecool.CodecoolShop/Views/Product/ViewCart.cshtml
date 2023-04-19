@@ -33,6 +33,11 @@
             <td align="center" colspan="5">No items in cart</td>
         </tr>
     }
+    <tr>
+        <td colspan="3"></td>
+        <th>Total price</th>
+        <td>@Model.Products.Sum(product => product.DefaultPrice * Model.Cart.Items[product.Id])</td>
+    </tr>
 </table>
-<a type="button" class="btn btn-primary @(Model.Products.Count == 0 ? "disabled" : "")" style="float: right" asp-controller="Product" asp-action="Index">Checkout</a>
+<a type="button" class="btn btn-primary float-right @(Model.Products.Count == 0 ? "disabled" : "")" asp-controller="Product" asp-action="Index">Checkout</a>
 

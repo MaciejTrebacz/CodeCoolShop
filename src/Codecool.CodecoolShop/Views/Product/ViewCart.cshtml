@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+@model CartViewModel
+
+<h1>Shopping Cart</h1>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price per unit</th>
+        <th>Currency</th>
+        <th>Subtotal</th>
+    </tr>
+    @if (Model.Products.Count > 0)
+    {
+        @foreach (var element in Model.Products)
+        {
+            <tr>
+                <td>@element.Name</td>
+                <td>@Model.Cart.Items[element.Id]</td>
+                <td>@element.DefaultPrice</td>
+                <td>@element.Currency</td>
+                <td>@(element.DefaultPrice * Model.Cart.Items[element.Id])</td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td align="center" colspan="5">No items in cart</td>
+        </tr>
+    }
+    <tr>
+        <td colspan="3"></td>
+        <th>Total price</th>
+        <td>@Model.Products.Sum(product => product.DefaultPrice * Model.Cart.Items[product.Id])</td>
+    </tr>
+</table>
+<a type="button" class="btn btn-primary float-right @(Model.Products.Count == 0 ? "disabled" : "")" asp-controller="Product" asp-action="Index">Checkout</a>
+

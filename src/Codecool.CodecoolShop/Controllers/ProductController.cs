@@ -3,6 +3,7 @@ using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json;
 using Codecool.CodecoolShop.Logic;
@@ -53,7 +54,7 @@ namespace Codecool.CodecoolShop.Controllers
             cart.Items.TryGetValue(productId, out var currentCount);
             cart.Items[productId] = currentCount + 1;
             SaveCart(cart);
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewCart");
         }
 
         private ShoppingCart GetCart()
@@ -122,6 +123,28 @@ namespace Codecool.CodecoolShop.Controllers
                         Value = s.Id.ToString(),
                         Text = s.Name
                     })
+            };
+
+            return View(model);
+        }
+
+
+
+        public async Task<IActionResult> SortBySupplier()
+        {
+            return View();
+        }
+
+        public IActionResult ViewCart()
+        {
+            var cart = GetCart();
+            var productIds = cart.Items.Keys.ToList();
+            var products = productIds.Select(productId => _productService.GetProduct(productId)).ToList();
+
+            var model = new CartViewModel
+            {
+                Cart = cart,
+                Products = products
             };
 
             return View(model);

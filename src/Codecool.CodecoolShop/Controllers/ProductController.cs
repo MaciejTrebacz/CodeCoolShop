@@ -4,6 +4,7 @@ using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json;
 using Codecool.CodecoolShop.Logic;
@@ -115,7 +116,16 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult ViewCart()
         {
             var cart = GetCart();
-            return View();
+            var productIds = cart.Items.Keys.ToList();
+            var products = productIds.Select(productId => _productService.GetProduct(productId)).ToList();
+
+            var model = new CartViewModel
+            {
+                Cart = cart,
+                Products = products
+            };
+
+            return View(model);
         }
     }
 }

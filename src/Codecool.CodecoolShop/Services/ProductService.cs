@@ -21,5 +21,11 @@ namespace Codecool.CodecoolShop.Services
              .Include(x => x.Supplier)
              .ToList();
         }
+
+        public Product GetProduct(int id)
+        {
+            return _dbContext.Products
+                .Include(product => product.Supplier).First(product => product.Id == id);
+        }
     }
 }

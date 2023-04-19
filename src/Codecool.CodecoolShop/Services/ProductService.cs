@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Codecool.CodecoolShop.Data;
+using Codecool.CodecoolShop.Logic;
 using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Models.NewFolder;
 using Microsoft.EntityFrameworkCore;
 
 namespace Codecool.CodecoolShop.Services
@@ -20,6 +22,21 @@ namespace Codecool.CodecoolShop.Services
          return _dbContext.Products
              .Include(x => x.Supplier)
              .ToList();
+        }
+
+        public ProductsCart GetProductsCartByShoppingCart(ShoppingCart cart)
+        {
+            var products = new ProductsCart();
+
+            foreach (var (id, amount) in cart.Items)
+            {
+                var product = _dbContext.Products
+                    .Include(supplier => supplier.Supplier)
+                    .First(product => product.Id == id);
+
+                products.Products.Add(product, amount);
+            }
+            return products;
         }
 
         public Product GetProduct(int id)

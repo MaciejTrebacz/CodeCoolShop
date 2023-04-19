@@ -1,0 +1,53 @@
+﻿@using Codecool.CodecoolShop.Models.Payment
+@model Codecool.CodecoolShop.Models.Payment.PaymentModel
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h1>Payment</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Payment" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PaymentProvider" class="control-label"></label>
+                <select asp-for="PaymentProvider" class="form-control" asp-items="@Html.GetEnumSelectList<PaymentProviders>()"></select>
+                <span asp-validation-for="PaymentProvider" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardNumber" class="control-label"></label>
+                <input asp-for="CardNumber" class="form-control" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="xxxx xxxx xxxx xxxx"/>
+                <span asp-validation-for="CardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardHolder" class="control-label"></label>
+                <input asp-for="CardHolder" class="form-control" />
+                <span asp-validation-for="CardHolder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpiryDate" class="control-label"></label>
+                <input asp-for="ExpiryDate" class="form-control" type="month"/>
+                <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CVV" class="control-label"></label>
+                <input asp-for="CVV" class="form-control" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+                <span asp-validation-for="CVV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

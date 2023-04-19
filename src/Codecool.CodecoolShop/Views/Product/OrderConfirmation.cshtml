@@ -1,0 +1,82 @@
+﻿@model Codecool.CodecoolShop.Models.OrderModel
+
+@{
+    ViewData["Title"] = "OrderConfirmation";
+    int index = 0;
+    decimal subtotalPrice;
+    decimal totalPrice = 0;
+}
+
+<h1>Order Confirmation</h1>
+<br/>
+<h2>Products list</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price per unit</th>
+        <th scope="col">Subtotal</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var (product, quantity) in Model.Products.Products)
+    {
+        <tr>
+            @{ index++;}
+            <th scope="row">@index</th>
+            <td>@product.Name</td>
+            <td>@quantity</td>
+            <td>@product.DefaultPrice</td>
+            @{ subtotalPrice = product.DefaultPrice * quantity;}
+            <td>@subtotalPrice</td>
+            @{ totalPrice += subtotalPrice;}
+        </tr>
+    }
+    <tr>
+        <td colspan="3"></td>
+        <th>Total price</th>
+        <td>@totalPrice</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Shipment details</h2>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Name: </b> @Model.UserData.Name</li>
+    <li class="list-group-item"><b>Email: </b> @Model.UserData.Email</li>
+    <li class="list-group-item"><b>Phone number: </b> @Model.UserData.PhoneNumber</li>
+</ul>
+<br/>
+
+<h5>Billing Address</h5>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Country: </b>@Model.UserData.BillingAddress.Country</li>
+    <li class="list-group-item"><b>City: </b>@Model.UserData.BillingAddress.City</li>
+    <li class="list-group-item"><b>Zip Code: </b>@Model.UserData.BillingAddress.Zipcode</li>
+    <li class="list-group-item"><b>Address: </b>@Model.UserData.BillingAddress.Address</li>
+</ul>
+<br/>
+
+<h5>Shipping Address</h5>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Country: </b>@Model.UserData.ShippingAddress.Country</li>
+    <li class="list-group-item"><b>City: </b>@Model.UserData.ShippingAddress.City</li>
+    <li class="list-group-item"><b>Zip Code: </b>@Model.UserData.ShippingAddress.Zipcode</li>
+    <li class="list-group-item"><b>Address: </b>@Model.UserData.ShippingAddress.Address</li>
+</ul>
+<br/><br/>
+
+<h2>Payment details</h2>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Payment provider: </b>@Model.Payment.PaymentProvider</li>
+    <li class="list-group-item"><b>Card number: </b>**** **** **** @Model.Payment.CardNumber.Substring(12)</li>
+    <li class="list-group-item"><b>Card holder: </b>@Model.Payment.CardHolder</li>
+</ul>
+
+<br/><br/>
+@using (Html.BeginForm("OrderConfirmation", "Product", FormMethod.Post))
+{
+    <input type="submit" value="Confirm" class="btn btn-primary"/>
+}

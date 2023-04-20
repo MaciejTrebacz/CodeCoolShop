@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Codecool.CodecoolShop
 {
@@ -51,6 +52,7 @@ namespace Codecool.CodecoolShop
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

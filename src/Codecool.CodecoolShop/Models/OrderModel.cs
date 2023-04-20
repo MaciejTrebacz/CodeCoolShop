@@ -9,5 +9,13 @@ namespace Codecool.CodecoolShop.Models
         public ProductsCart Products { get; set; }
         public UserDataModel UserData { get; set; }
         public PaymentModel Payment { get; set; }
+        public OrderStatus OrderStatus { get; set; }
+    }
+
+    public enum OrderStatus
+    {
+        Success,
+        AwaitingPayment,
+        Received
     }
 }

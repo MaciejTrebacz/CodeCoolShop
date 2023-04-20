@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Codecool.CodecoolShop.Services;
 

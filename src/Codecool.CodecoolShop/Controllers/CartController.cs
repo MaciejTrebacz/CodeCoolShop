@@ -16,22 +16,25 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoMapper;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Codecool.CodecoolShop.Controllers
 {
     public class CartController : Controller
     {
 
-        private readonly ILogger<ProductController> _logger;
+        private ILogger<ProductController> _logger;
         private readonly ProductService _productService;
         private readonly IMapper _mapper;
-        public string FilePath { get; set; }
+        private ILogger? Logger;
+
         
         public CartController(ILogger<ProductController> logger, ProductService productService, IMapper mapper)
         {
             _logger = logger;
             _productService = productService;
             _mapper = mapper;
+
         }
 
         public IActionResult ViewCart()
@@ -97,6 +100,7 @@ namespace Codecool.CodecoolShop.Controllers
         [HttpPost]
         public IActionResult Checkout(UserDataModel userData)
         {
+
             if (!ModelState.IsValid)
             {
                 return View(userData);
@@ -104,8 +108,20 @@ namespace Codecool.CodecoolShop.Controllers
 
             var newOrder = new OrderModel
             {
-                OrderStatus = OrderStatus.Received
+                OrderStatus = OrderStatus.Received,
+                UserData = userData
             };
+
+
+
+            FilePath.Path = Path.Combine(Environment.CurrentDirectory, "Data", "Log", $"{newOrder.OrderId}.json");
+            var log = new LoggerConfiguration()
+                .WriteTo.File(new JsonFormatter(), FilePath.Path)
+                .CreateLogger();
+
+            log.Information("Order UserName: {@name} " +
+                            "Shipping Address: {@Address}" +
+                            "Order Status : {@orderstatus}", newOrder.UserData.Name, newOrder.UserData.ShippingAddress, newOrder.OrderStatus);
 
 
             HttpContext.Session.SetString("UserData", JsonSerializer.Serialize(userData));
@@ -130,12 +146,24 @@ namespace Codecool.CodecoolShop.Controllers
                 return View(payment);
             }
 
+     
+
+
             HttpContext.Session.SetString("Payment", JsonSerializer.Serialize(payment));
 
             var newOrder = JsonSerializer.Deserialize<OrderModel>(HttpContext.Session.GetString("OrderModel"));
-            newOrder.OrderStatus = OrderStatus.Success;
+            newOrder.OrderStatus = OrderStatus.MoneyReceived;
+            Debug.Write(newOrder.OrderStatus);
+            var log = new LoggerConfiguration()
+                .WriteTo.File(new JsonFormatter(), FilePath.Path)
+                .CreateLogger();
 
+            log.Information("Order UserName: {@name} " +
+                            "Shipping Address: {@Address}" +
+                            "Order Status : {@orderstatus}", newOrder.UserData.Name, newOrder.UserData.ShippingAddress, newOrder.OrderStatus);
 
+            log.Information("HELLLOOOOO");
+            HttpContext.Session.SetString("OrderModel", JsonSerializer.Serialize(newOrder));
 
 
             return RedirectToAction("OrderConfirmation");
@@ -150,22 +178,30 @@ namespace Codecool.CodecoolShop.Controllers
 
             var cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
 
+            var newOrder = JsonSerializer.Deserialize<OrderModel>(HttpContext.Session.GetString("OrderModel"));
+            newOrder.OrderStatus = OrderStatus.Success;
+
+            var log = new LoggerConfiguration()
+                .WriteTo.File(new JsonFormatter(), FilePath.Path)
+                .CreateLogger();
+
+            log.Information("Order UserName: {@name} " +
+                            "Shipping Address: {@Address}" +
+                            "Order Status : {@orderstatus}", newOrder.UserData.Name, newOrder.UserData.ShippingAddress, newOrder.OrderStatus);
+
+
+
+            log.Information("HELLLOOOOO");
+
+
+
             var order = new OrderModel()
             {
                 Products = _productService.GetProductsCartByShoppingCart(cart),
                 Payment = JsonSerializer.Deserialize<PaymentModel>(HttpContext.Session.Get("Payment")),
                 UserData = JsonSerializer.Deserialize<UserDataModel>(HttpContext.Session.Get("UserData"))
             };
-            //FilePath = $"{AppDomain.CurrentDomain.BaseDirectory}Data\\Log\\{cart.Id}.json";
-            FilePath = Path.Combine(Environment.CurrentDirectory, "Data", "Log", $"{cart.Id}.json");
-            Console.WriteLine();
-            var log = new LoggerConfiguration()
-                .WriteTo.File(new JsonFormatter(), FilePath)
-                .CreateLogger();
 
-            log.Information("Order UserName: {@name} " +
-                            "Shipping Address: {@Address}" +
-                            "Order Status : {@orderstatus}", order.UserData.Name, order.UserData.ShippingAddress, order.OrderStatus);
 
             if (Request.Method == "POST")
             {
@@ -184,7 +220,7 @@ namespace Codecool.CodecoolShop.Controllers
                 string filePath =
                     $"{AppDomain.CurrentDomain.BaseDirectory}\\orders\\{cart.Id}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.json";
 
-                SaveToFile.ToJson(jsonOrder, filePath);
+                //SaveToFile.ToJson(jsonOrder, filePath);
 
                 //TODO send email to user about order
 
@@ -192,5 +228,11 @@ namespace Codecool.CodecoolShop.Controllers
             }
             return View(order);
         }
+    }
+
+    public class FilePath
+    {
+        public static string Path { get; set; }
+
     }
 }

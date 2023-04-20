@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.Json;
 using Codecool.CodecoolShop.Models;
 
@@ -40,6 +41,10 @@ namespace Codecool.CodecoolShop.Controllers
         private void SaveCart(ShoppingCart cart)
         {
             Debug.WriteLine("Saved cart");
+            foreach (var item in cart.Items.Keys.ToList().Where(key => cart.Items[key] == 0))
+            {
+                cart.Items.Remove(item);
+            }
             HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
         }
     }

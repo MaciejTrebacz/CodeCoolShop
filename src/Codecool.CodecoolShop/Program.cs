@@ -1,9 +1,14 @@
 using System;
+using System.Globalization;
+using System.IO;
+using Codecool.CodecoolShop.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging.Configuration;
 using Serilog;
+using Serilog.Filters;
+using Serilog.Formatting.Json;
 
 namespace Codecool.CodecoolShop
 {
@@ -14,16 +19,29 @@ namespace Codecool.CodecoolShop
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
+            var newGuid = Guid.NewGuid();
+
+
+            FilePath.Path = Path.Combine(Environment.CurrentDirectory, "Data", "Log", $"{newGuid}.json");
 
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
+                .MinimumLevel.Information()
+                .Enrich.FromLogContext()
+                .WriteTo.Console(new JsonFormatter())
+                .WriteTo.File(new JsonFormatter(), FilePath.Path)
+                .Filter.ByIncludingOnly(evt => evt.Properties.ContainsKey("SourceContext") && evt.Properties["SourceContext"].ToString().Contains("CartController"))
                 .CreateLogger();
+
+
+            Log.Information(FilePath.Path);
 
 
             try
             {
                 Log.Information("Application Starting Up");
                 CreateHostBuilder(args).Build().Run();
+
+          
             }
             catch (Exception ex)
             {

@@ -20,6 +20,14 @@ namespace Codecool.CodecoolShop.Controllers
             SaveCart(cart);
         }
 
+        [HttpPost]
+        public void RemoveFromCart(RemoveFromCartParameters parameters)
+        {
+            var cart = GetCart();
+            cart.Items.Remove(parameters.productId);
+            SaveCart(cart);
+        }
+
         private ShoppingCart GetCart()
         {
             ShoppingCart cart;

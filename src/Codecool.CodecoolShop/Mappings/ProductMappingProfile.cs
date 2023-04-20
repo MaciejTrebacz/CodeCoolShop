@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Models.DTO;
+using Codecool.CodecoolShop.Models.Products;
 
 namespace Codecool.CodecoolShop.Mappings
 {

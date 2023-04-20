@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Codecool.CodecoolShop.Models.Products;
 
 namespace Codecool.CodecoolShop.Services;
 

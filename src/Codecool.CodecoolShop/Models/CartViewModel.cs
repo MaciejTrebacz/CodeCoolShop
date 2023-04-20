@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Codecool.CodecoolShop.Logic;
+using Codecool.CodecoolShop.Models.Products;
 
 namespace Codecool.CodecoolShop.Models
 {

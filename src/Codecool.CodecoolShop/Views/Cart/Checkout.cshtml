@@ -1,7 +1,7 @@
 ﻿@model Codecool.CodecoolShop.Models.UserData.UserDataModel
 
 @{
-    ViewData["Title"] = "CheckoutCart";
+    ViewData["Title"] = "Checkout";
 }
 
 <h1>CheckoutCart</h1>
@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CheckoutCart" method="post">
+        <form asp-action="Checkout" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name</label>
@@ -81,7 +81,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="ViewCart" asp-controller="Cart">Back to cart</a>
 </div>
 
 @section Scripts {

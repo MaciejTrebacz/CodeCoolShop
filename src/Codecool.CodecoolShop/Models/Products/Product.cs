@@ -1,4 +1,4 @@
-namespace Codecool.CodecoolShop.Models
+namespace Codecool.CodecoolShop.Models.Products
 {
     public class Product : BaseModel
     {

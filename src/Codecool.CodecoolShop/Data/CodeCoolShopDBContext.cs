@@ -1,4 +1,4 @@
-﻿using Codecool.CodecoolShop.Models;
+﻿using Codecool.CodecoolShop.Models.Products;
 using Microsoft.EntityFrameworkCore;
 
 namespace Codecool.CodecoolShop.Data;

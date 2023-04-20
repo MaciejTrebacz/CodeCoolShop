@@ -1,6 +1,6 @@
-﻿@using Codecool.CodecoolShop.Services
+﻿@using Codecool.CodecoolShop.Models.Products
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model Codecool.CodecoolShop.Models.ProductViewModel
+@model Codecool.CodecoolShop.Models.Products.ProductViewModel
 
 
 <form method="post" asp-controller="Product" asp-action="Sort">
@@ -45,8 +45,8 @@
                     <p class="card-text">@element.Description</p>
                     <p class="card-text">Category: @element.ProductCategory</p>
                     <p class="card-text">Supplier: @element.Supplier.Name</p>
-                    <p class="card-text text-center"><strong>Price: @element.DefaultPrice.ToString("C2")</strong></p>
-                    <a type="button" class="btn btn-primary" style="float: bottom" asp-controller="Product" asp-action="AddToCart" asp-route-productId="@element.Id">Add To Cart</a>
+                    <p class="card-text text-center"><strong>Price: @element.DefaultPrice @element.Currency</strong></p>
+                    <a type="button" class="btn btn-primary" style="float: bottom" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@element.Id">Add To Cart</a>
                 </div>
             </div>
         </div>

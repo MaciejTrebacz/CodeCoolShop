@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Codecool.CodecoolShop.Models;
 using System.Linq;
 using Bogus;
+using Codecool.CodecoolShop.Models.Products;
 
 namespace Codecool.CodecoolShop.Data;
 

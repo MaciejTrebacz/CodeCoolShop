@@ -1,7 +1,7 @@
 ﻿@model Codecool.CodecoolShop.Models.OrderModel
 
 @{
-    ViewData["Title"] = "OrderConfirmation";
+    ViewData["Title"] = "Order Confirmation";
     int index = 0;
     decimal subtotalPrice;
     decimal totalPrice = 0;
@@ -76,7 +76,7 @@
 </ul>
 
 <br/><br/>
-@using (Html.BeginForm("OrderConfirmation", "Product", FormMethod.Post))
+@using (Html.BeginForm("OrderConfirmation", "Cart", FormMethod.Post))
 {
     <input type="submit" value="Confirm" class="btn btn-primary"/>
 }

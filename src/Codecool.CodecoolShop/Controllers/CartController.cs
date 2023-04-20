@@ -1,25 +1,37 @@
 ﻿using Codecool.CodecoolShop.Logic;
 using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Models.DTO;
+using Codecool.CodecoolShop.Models.Payment;
+using Codecool.CodecoolShop.Models.UserData;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Serilog.Formatting.Json;
+using Serilog;
+using System.Collections.Generic;
+using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
+using AutoMapper;
 
 namespace Codecool.CodecoolShop.Controllers
 {
     public class CartController : Controller
     {
 
-        private readonly ILogger _logger;
+        private readonly ILogger<ProductController> _logger;
         private readonly ProductService _productService;
-
-        public CartController(ILogger<ProductController> logger, ProductService productService)
+        private readonly IMapper _mapper;
+        public string FilePath { get; set; }
+        
+        public CartController(ILogger<ProductController> logger, ProductService productService, IMapper mapper)
         {
             _logger = logger;
             _productService = productService;
+            _mapper = mapper;
         }
 
         public IActionResult ViewCart()
@@ -68,6 +80,117 @@ namespace Codecool.CodecoolShop.Controllers
         {
             Debug.WriteLine("Saved cart");
             HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
+        }
+
+        public IActionResult Checkout()
+        {
+            var cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
+
+            if (cart.Items.Count == 0) return StatusCode(403);
+            if (HttpContext.Session.Get("UserData") == null) return View();
+
+            var userData = JsonSerializer.Deserialize<UserDataModel>(HttpContext.Session.Get("UserData"));
+
+            return View(userData);
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(UserDataModel userData)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(userData);
+            }
+
+            var newOrder = new OrderModel
+            {
+                OrderStatus = OrderStatus.Received
+            };
+
+
+            HttpContext.Session.SetString("UserData", JsonSerializer.Serialize(userData));
+            HttpContext.Session.SetString("OrderModel", JsonSerializer.Serialize(newOrder));
+
+
+            return RedirectToAction("Payment");
+        }
+
+        public IActionResult Payment()
+        {
+            if (HttpContext.Session.Get("UserData") == null) return StatusCode(403);
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Payment(PaymentModel payment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(payment);
+            }
+
+            HttpContext.Session.SetString("Payment", JsonSerializer.Serialize(payment));
+
+            var newOrder = JsonSerializer.Deserialize<OrderModel>(HttpContext.Session.GetString("OrderModel"));
+            newOrder.OrderStatus = OrderStatus.Success;
+
+
+
+
+            return RedirectToAction("OrderConfirmation");
+        }
+
+        public IActionResult OrderConfirmation()
+        {
+
+            if (HttpContext.Session.Get("UserData") == null
+                || HttpContext.Session.Get("Payment") == null) return StatusCode(403);
+
+
+            var cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
+
+            var order = new OrderModel()
+            {
+                Products = _productService.GetProductsCartByShoppingCart(cart),
+                Payment = JsonSerializer.Deserialize<PaymentModel>(HttpContext.Session.Get("Payment")),
+                UserData = JsonSerializer.Deserialize<UserDataModel>(HttpContext.Session.Get("UserData"))
+            };
+            //FilePath = $"{AppDomain.CurrentDomain.BaseDirectory}Data\\Log\\{cart.Id}.json";
+            FilePath = Path.Combine(Environment.CurrentDirectory, "Data", "Log", $"{cart.Id}.json");
+            Console.WriteLine();
+            var log = new LoggerConfiguration()
+                .WriteTo.File(new JsonFormatter(), FilePath)
+                .CreateLogger();
+
+            log.Information("Order UserName: {@name} " +
+                            "Shipping Address: {@Address}" +
+                            "Order Status : {@orderstatus}", order.UserData.Name, order.UserData.ShippingAddress, order.OrderStatus);
+
+            if (Request.Method == "POST")
+            {
+                HttpContext.Session.Clear();
+
+                var productsDto = _mapper.Map<List<ProductDto>>(order.Products.Products);
+                productsDto.ForEach(x => x.Subtotal = x.PricePerUnit * x.Quantity);
+
+                var jsonOrder = new OrderToFileModel()
+                {
+                    Payment = order.Payment,
+                    UserData = order.UserData,
+                    Products = productsDto
+                };
+
+                string filePath =
+                    $"{AppDomain.CurrentDomain.BaseDirectory}\\orders\\{cart.Id}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.json";
+
+                SaveToFile.ToJson(jsonOrder, filePath);
+
+                //TODO send email to user about order
+
+                return RedirectToAction("Index", "Product");
+            }
+            return View(order);
         }
     }
 }

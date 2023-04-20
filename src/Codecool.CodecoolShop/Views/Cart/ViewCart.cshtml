@@ -25,7 +25,7 @@
         @foreach (var element in Model.Products)
         {
             <tr id="row-@element.Id">
-                <td>@element.Name</td>
+                <td><a asp-controller="Product" asp-action="Details" asp-route-productId="@element.Id">@element.Name</a></td>
                 <td><input type="number" value="@Model.Cart.Items[element.Id]" class="form-control" min="0" oninput="this.value = Math.abs(this.value)" onchange="testFunc(event)" data-id="@element.Id"/></td>
                 <td id="price-@element.Id">@element.DefaultPrice</td>
                 <td>@element.Currency</td>

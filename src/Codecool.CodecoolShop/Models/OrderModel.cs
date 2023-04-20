@@ -1,5 +1,5 @@
-﻿using Codecool.CodecoolShop.Models.NewFolder;
-using Codecool.CodecoolShop.Models.Payment;
+﻿using Codecool.CodecoolShop.Models.Payment;
+using Codecool.CodecoolShop.Models.Products;
 using Codecool.CodecoolShop.Models.UserData;
 
 namespace Codecool.CodecoolShop.Models

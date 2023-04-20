@@ -31,9 +31,10 @@
     {
         element.Description = element.Description.Length > 30 ? element.Description.Substring(0, 30) + "..." : element.Description;
         element.Supplier.Name = element.Supplier.Name.Length > 20 ? element.Supplier.Name.Substring(0, 20) + "..." : element.Supplier.Name;
+    
         <div class="col-lg-3 col-lg-3" style="display: inline-block; max-width: 350px; height: 500px">
             <div class="card">
-                <img src="img/@(element.Image).jpg" style="height: 50%; width: 50%; align-self: center; padding-top: 10px">
+                <img src="/img/@(element.Image).jpg" style="height: 50%; width: 50%; align-self: center; padding-top: 10px">
 
                 <div class="card-body">
                     <h5 class="card-title text-center">

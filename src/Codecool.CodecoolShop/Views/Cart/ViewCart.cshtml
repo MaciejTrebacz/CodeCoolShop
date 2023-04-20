@@ -18,17 +18,23 @@
         <th>Price per unit</th>
         <th>Currency</th>
         <th>Subtotal</th>
+        <th></th>
     </tr>
     @if (Model.Products.Count > 0)
     {
         @foreach (var element in Model.Products)
         {
-            <tr>
+            <tr id="row-@element.Id">
                 <td>@element.Name</td>
                 <td><input type="number" value="@Model.Cart.Items[element.Id]" class="form-control" min="0" oninput="this.value = Math.abs(this.value)" onchange="testFunc(event)" data-id="@element.Id"/></td>
                 <td id="price-@element.Id">@element.DefaultPrice</td>
                 <td>@element.Currency</td>
                 <td id="subtotal-@element.Id">@(element.DefaultPrice * Model.Cart.Items[element.Id])</td>
+                <td>
+                    <a class="nav-link text-dark" style="cursor: pointer;" onclick="removeItem(event)" data-id="@element.Id">
+                        <i class="bi bi-x-square text-danger"></i>
+                    </a>
+                </td>
             </tr>
         }
     }
@@ -42,6 +48,7 @@
         <td colspan="3"></td>
         <th>Total price</th>
         <td id="totalPrice">@Model.Products.Sum(product => product.DefaultPrice * Model.Cart.Items[product.Id])</td>
+        <th></th>
     </tr>
 </table>
 <a type="button" class="btn btn-primary float-right @(Model.Products.Count == 0 ? "disabled" : "")" asp-controller="Product" asp-action="CheckoutCart">Checkout</a>

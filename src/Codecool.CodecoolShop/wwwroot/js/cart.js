@@ -38,3 +38,30 @@ function changeQuantityServerside(productId, quantity) {
     });
 
 }
+
+function removeItem(event) {
+    var productId = event.currentTarget.getAttribute("data-id");
+
+    let subtotalElement = document.getElementById("subtotal-" + productId);
+    let oldSubtotal = parseFloat(subtotalElement.innerText);
+
+    let totalPriceElement = document.getElementById("totalPrice");
+    let totalPrice = parseFloat(totalPriceElement.innerText);
+
+    totalPrice = (totalPrice - oldSubtotal).toFixed(2);
+
+    totalPriceElement.innerText = totalPrice;
+
+    document.getElementById("row-" + productId).remove();
+
+    fetch("/api/CartApi/RemoveFromCart", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            productId: productId
+        })
+    });
+}

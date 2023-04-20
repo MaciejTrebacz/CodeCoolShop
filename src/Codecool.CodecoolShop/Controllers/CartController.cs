@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoMapper;
+using Serilog.Events;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Codecool.CodecoolShop.Controllers
@@ -27,14 +28,15 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ProductService _productService;
         private readonly IMapper _mapper;
         private ILogger? Logger;
+        private readonly ILogger<CartController> cartLogger;
 
-        
-        public CartController(ILogger<ProductController> logger, ProductService productService, IMapper mapper)
+
+        public CartController(ILogger<ProductController> logger, ProductService productService, IMapper mapper, ILogger<CartController> cartLogger)
         {
             _logger = logger;
             _productService = productService;
             _mapper = mapper;
-
+            this.cartLogger = cartLogger;
         }
 
         public IActionResult ViewCart()
@@ -113,17 +115,19 @@ namespace Codecool.CodecoolShop.Controllers
             };
 
 
-
             FilePath.Path = Path.Combine(Environment.CurrentDirectory, "Data", "Log", $"{newOrder.OrderId}.json");
+
+
+
+            cartLogger.LogInformation("{@order}", newOrder);
             var log = new LoggerConfiguration()
                 .WriteTo.File(new JsonFormatter(), FilePath.Path)
                 .CreateLogger();
-
             log.Information("Order UserName: {@name} " +
                             "Shipping Address: {@Address}" +
                             "Order Status : {@orderstatus}", newOrder.UserData.Name, newOrder.UserData.ShippingAddress, newOrder.OrderStatus);
 
-
+            
             HttpContext.Session.SetString("UserData", JsonSerializer.Serialize(userData));
             HttpContext.Session.SetString("OrderModel", JsonSerializer.Serialize(newOrder));
 
@@ -146,23 +150,18 @@ namespace Codecool.CodecoolShop.Controllers
                 return View(payment);
             }
 
-     
-
-
+            
             HttpContext.Session.SetString("Payment", JsonSerializer.Serialize(payment));
 
             var newOrder = JsonSerializer.Deserialize<OrderModel>(HttpContext.Session.GetString("OrderModel"));
             newOrder.OrderStatus = OrderStatus.MoneyReceived;
-            Debug.Write(newOrder.OrderStatus);
             var log = new LoggerConfiguration()
-                .WriteTo.File(new JsonFormatter(), FilePath.Path)
+                .WriteTo.File(new JsonFormatter(), FilePath.Path, rollingInterval: RollingInterval.Day, shared: true)
                 .CreateLogger();
-
             log.Information("Order UserName: {@name} " +
                             "Shipping Address: {@Address}" +
                             "Order Status : {@orderstatus}", newOrder.UserData.Name, newOrder.UserData.ShippingAddress, newOrder.OrderStatus);
 
-            log.Information("HELLLOOOOO");
             HttpContext.Session.SetString("OrderModel", JsonSerializer.Serialize(newOrder));
 
 

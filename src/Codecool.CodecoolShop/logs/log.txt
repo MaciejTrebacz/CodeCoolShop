@@ -1,0 +1,341 @@
+2023-04-20 22:19:24.171 +07:00 [INF] Application Starting Up
+2023-04-20 22:19:26.587 +07:00 [INF] User profile is available. Using 'C:\Users\macie\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-04-20 22:19:29.900 +07:00 [WRN] No store type was specified for the decimal property 'DefaultPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2023-04-20 22:19:31.280 +07:00 [INF] Executed DbCommand (104ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2023-04-20 22:19:32.036 +07:00 [INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2023-04-20 22:19:32.234 +07:00 [INF] Now listening on: https://localhost:5001
+2023-04-20 22:19:32.234 +07:00 [INF] Now listening on: http://localhost:5000
+2023-04-20 22:19:32.240 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-20 22:19:32.241 +07:00 [INF] Hosting environment: Development
+2023-04-20 22:19:32.241 +07:00 [INF] Content root path: C:\Users\macie\source\repos\codecool-shop-1-csharp-MarcinSzkurlat\src\Codecool.CodecoolShop
+2023-04-20 22:19:33.170 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2023-04-20 22:19:33.270 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop)'
+2023-04-20 22:19:33.295 +07:00 [INF] Route matched with {action = "Index", controller = "Product"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Codecool.CodecoolShop.Controllers.ProductController (Codecool.CodecoolShop).
+2023-04-20 22:19:33.312 +07:00 [INF] Accessing expired session, Key:18755570-fb3a-45d9-1206-b48add4f5602
+2023-04-20 22:19:33.631 +07:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+2023-04-20 22:19:33.881 +07:00 [INF] Executing ViewResult, running view Index.
+2023-04-20 22:19:34.199 +07:00 [INF] Executed ViewResult - view Index executed in 309.9158ms.
+2023-04-20 22:19:34.217 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop) in 920.3401ms
+2023-04-20 22:19:34.218 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop)'
+2023-04-20 22:19:34.224 +07:00 [INF] HTTP GET / responded 200 in 988.2133 ms
+2023-04-20 22:19:34.229 +07:00 [INF] Session started; Key:18755570-fb3a-45d9-1206-b48add4f5602, Id:edeb1d74-b34b-e1f7-6582-c3d68a5d9c1f
+2023-04-20 22:19:34.399 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - text/html;+charset=utf-8 1237.7921ms
+2023-04-20 22:19:34.518 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/lib/bootstrap/dist/css/bootstrap.min.css - -
+2023-04-20 22:19:34.545 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:19:34.552 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 6.8380ms
+2023-04-20 22:19:34.553 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/lib/bootstrap-icons-1.10.4/font/bootstrap-icons.css - -
+2023-04-20 22:19:34.555 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:19:34.560 +07:00 [INF] The file /lib/bootstrap-icons-1.10.4/font/bootstrap-icons.css was not modified
+2023-04-20 22:19:34.562 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/lib/bootstrap-icons-1.10.4/font/bootstrap-icons.css - - - 304 - text/css 8.9560ms
+2023-04-20 22:19:34.600 +07:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Users\macie\source\repos\codecool-shop-1-csharp-MarcinSzkurlat\src\Codecool.CodecoolShop\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2023-04-20 22:19:34.600 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/lib/bootstrap/dist/css/bootstrap.min.css - - - 0 155764 text/css 82.3117ms
+2023-04-20 22:19:34.616 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/lib/bootstrap-icons-1.10.4/font/fonts/bootstrap-icons.woff2?1fa40e8900654d2863d011707b9fb6f2 - -
+2023-04-20 22:19:34.690 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 135.7114ms
+2023-04-20 22:19:34.695 +07:00 [INF] Sending file. Request path: '/lib/bootstrap-icons-1.10.4/font/fonts/bootstrap-icons.woff2'. Physical path: 'C:\Users\macie\source\repos\codecool-shop-1-csharp-MarcinSzkurlat\src\Codecool.CodecoolShop\wwwroot\lib\bootstrap-icons-1.10.4\font\fonts\bootstrap-icons.woff2'
+2023-04-20 22:19:34.696 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/lib/bootstrap-icons-1.10.4/font/fonts/bootstrap-icons.woff2?1fa40e8900654d2863d011707b9fb6f2 - - - 200 121340 font/woff2 79.3201ms
+2023-04-20 22:19:34.712 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/favicon.ico - -
+2023-04-20 22:19:34.714 +07:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\macie\source\repos\codecool-shop-1-csharp-MarcinSzkurlat\src\Codecool.CodecoolShop\wwwroot\favicon.ico'
+2023-04-20 22:19:34.714 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/favicon.ico - - - 0 32038 image/x-icon 1.6819ms
+2023-04-20 22:19:43.513 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/AddToCart?productId=102 - -
+2023-04-20 22:19:43.528 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.AddToCart (Codecool.CodecoolShop)'
+2023-04-20 22:19:43.553 +07:00 [INF] Route matched with {action = "AddToCart", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddToCart(Int32) on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:19:43.762 +07:00 [INF] Executing RedirectResult, redirecting to /Cart/ViewCart.
+2023-04-20 22:19:43.762 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.AddToCart (Codecool.CodecoolShop) in 208.7099ms
+2023-04-20 22:19:43.762 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.AddToCart (Codecool.CodecoolShop)'
+2023-04-20 22:19:43.762 +07:00 [INF] HTTP GET /Cart/AddToCart responded 302 in 243.8931 ms
+2023-04-20 22:19:43.762 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/AddToCart?productId=102 - - - 302 0 - 249.4657ms
+2023-04-20 22:19:43.774 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/ViewCart - -
+2023-04-20 22:19:43.779 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.ViewCart (Codecool.CodecoolShop)'
+2023-04-20 22:19:43.780 +07:00 [INF] Route matched with {action = "ViewCart", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ViewCart() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:19:43.990 +07:00 [INF] Executed DbCommand (55ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+WHERE [p].[Id] = @__id_0
+2023-04-20 22:19:43.993 +07:00 [INF] Executing ViewResult, running view ViewCart.
+2023-04-20 22:19:44.010 +07:00 [INF] Executed ViewResult - view ViewCart executed in 17.0168ms.
+2023-04-20 22:19:44.010 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.ViewCart (Codecool.CodecoolShop) in 229.6551ms
+2023-04-20 22:19:44.010 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.ViewCart (Codecool.CodecoolShop)'
+2023-04-20 22:19:44.010 +07:00 [INF] HTTP GET /Cart/ViewCart responded 200 in 235.1959 ms
+2023-04-20 22:19:44.013 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/ViewCart - - - 200 - text/html;+charset=utf-8 239.0013ms
+2023-04-20 22:19:44.150 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:19:44.178 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:19:44.179 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.5182ms
+2023-04-20 22:19:44.179 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/js/cart.js - -
+2023-04-20 22:19:44.196 +07:00 [INF] Sending file. Request path: '/js/cart.js'. Physical path: 'C:\Users\macie\source\repos\codecool-shop-1-csharp-MarcinSzkurlat\src\Codecool.CodecoolShop\wwwroot\js\cart.js'
+2023-04-20 22:19:44.196 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/js/cart.js - - - 200 2121 application/javascript 16.9237ms
+2023-04-20 22:19:44.238 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 87.1501ms
+2023-04-20 22:19:44.301 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/favicon.ico - -
+2023-04-20 22:19:44.303 +07:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\macie\source\repos\codecool-shop-1-csharp-MarcinSzkurlat\src\Codecool.CodecoolShop\wwwroot\favicon.ico'
+2023-04-20 22:19:44.303 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/favicon.ico - - - 0 32038 image/x-icon 1.4535ms
+2023-04-20 22:19:45.744 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/Checkout - -
+2023-04-20 22:19:45.750 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop)'
+2023-04-20 22:19:45.752 +07:00 [INF] Route matched with {action = "Checkout", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Checkout() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:19:45.755 +07:00 [INF] Executing ViewResult, running view Checkout.
+2023-04-20 22:19:45.878 +07:00 [INF] Executed ViewResult - view Checkout executed in 123.6524ms.
+2023-04-20 22:19:45.878 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop) in 125.6735ms
+2023-04-20 22:19:45.878 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop)'
+2023-04-20 22:19:45.878 +07:00 [INF] HTTP GET /Cart/Checkout responded 200 in 128.1951 ms
+2023-04-20 22:19:45.881 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/Checkout - - - 200 - text/html;+charset=utf-8 137.3662ms
+2023-04-20 22:19:46.005 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:19:46.058 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:19:46.058 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.3231ms
+2023-04-20 22:19:46.189 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 183.8829ms
+2023-04-20 22:19:53.645 +07:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Cart/Checkout application/x-www-form-urlencoded 582
+2023-04-20 22:19:53.648 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop)'
+2023-04-20 22:19:53.659 +07:00 [INF] Route matched with {action = "Checkout", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Checkout(Codecool.CodecoolShop.Models.UserData.UserDataModel) on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:19:53.719 +07:00 [INF] {"Products":null,"UserData":{"Name":"Ashton Fry","Email":"cazufi@mailinator.com","PhoneNumber":"+1 (323) 884-7691","BillingAddress":{"Country":"Deleniti in consequa","City":"Deserunt exercitatio","Zipcode":"22106","Address":"Est sit id dolorum m","$type":"BillingAddressModel"},"ShippingAddress":{"Country":"Exercitation modi om","City":"Non irure fuga Veli","Zipcode":"54766","Address":"Animi ullam et faci","$type":"ShippingAddressModel"},"$type":"UserDataModel"},"Payment":null,"OrderStatus":"Received","OrderId":"66131bb3-096c-4ac1-8578-3742b06229b5","OrderDateTime":"2023-04-20T15:19:53.7101529Z","$type":"OrderModel"}
+2023-04-20 22:19:53.842 +07:00 [INF] Executing RedirectResult, redirecting to /Cart/Payment.
+2023-04-20 22:19:53.843 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop) in 183.7489ms
+2023-04-20 22:19:53.843 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop)'
+2023-04-20 22:19:53.843 +07:00 [INF] HTTP POST /Cart/Checkout responded 302 in 195.1724 ms
+2023-04-20 22:19:53.843 +07:00 [INF] Request finished HTTP/2 POST https://localhost:5001/Cart/Checkout application/x-www-form-urlencoded 582 - 302 0 - 198.3391ms
+2023-04-20 22:19:53.849 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/Payment - -
+2023-04-20 22:19:53.851 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:19:53.853 +07:00 [INF] Route matched with {action = "Payment", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Payment() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:19:53.855 +07:00 [INF] Executing ViewResult, running view Payment.
+2023-04-20 22:19:53.904 +07:00 [INF] Executed ViewResult - view Payment executed in 50.6406ms.
+2023-04-20 22:19:53.904 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop) in 51.2421ms
+2023-04-20 22:19:53.904 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:19:53.904 +07:00 [INF] HTTP GET /Cart/Payment responded 200 in 53.7310 ms
+2023-04-20 22:19:53.908 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/Payment - - - 200 - text/html;+charset=utf-8 58.4929ms
+2023-04-20 22:19:54.092 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:19:54.096 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:19:54.097 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.3269ms
+2023-04-20 22:19:54.163 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 70.3124ms
+2023-04-20 22:20:53.853 +07:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Cart/Payment application/x-www-form-urlencoded 291
+2023-04-20 22:20:53.866 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:20:53.868 +07:00 [INF] Route matched with {action = "Payment", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Payment(Codecool.CodecoolShop.Models.Payment.PaymentModel) on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:20:53.886 +07:00 [INF] Executing ViewResult, running view Payment.
+2023-04-20 22:20:53.898 +07:00 [INF] Executed ViewResult - view Payment executed in 12.9522ms.
+2023-04-20 22:20:53.898 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop) in 28.3751ms
+2023-04-20 22:20:53.898 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:20:53.898 +07:00 [INF] HTTP POST /Cart/Payment responded 200 in 34.2252 ms
+2023-04-20 22:20:53.903 +07:00 [INF] Request finished HTTP/2 POST https://localhost:5001/Cart/Payment application/x-www-form-urlencoded 291 - 200 - text/html;+charset=utf-8 50.0690ms
+2023-04-20 22:20:54.058 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:20:54.079 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:20:54.079 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.3766ms
+2023-04-20 22:20:54.168 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 109.6177ms
+2023-04-20 22:20:59.897 +07:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Cart/Payment application/x-www-form-urlencoded 289
+2023-04-20 22:20:59.900 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:20:59.900 +07:00 [INF] Route matched with {action = "Payment", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Payment(Codecool.CodecoolShop.Models.Payment.PaymentModel) on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:20:59.963 +07:00 [INF] Executing RedirectResult, redirecting to /Cart/OrderConfirmation.
+2023-04-20 22:20:59.963 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop) in 62.6718ms
+2023-04-20 22:20:59.963 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:20:59.963 +07:00 [INF] HTTP POST /Cart/Payment responded 302 in 63.1459 ms
+2023-04-20 22:20:59.964 +07:00 [INF] Request finished HTTP/2 POST https://localhost:5001/Cart/Payment application/x-www-form-urlencoded 289 - 302 0 - 66.5480ms
+2023-04-20 22:20:59.970 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/OrderConfirmation - -
+2023-04-20 22:20:59.972 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop)'
+2023-04-20 22:20:59.974 +07:00 [INF] Route matched with {action = "OrderConfirmation", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult OrderConfirmation() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:20:59.986 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+WHERE [p].[Id] = @__id_0
+2023-04-20 22:20:59.990 +07:00 [INF] Executing ViewResult, running view OrderConfirmation.
+2023-04-20 22:21:00.002 +07:00 [INF] Executed ViewResult - view OrderConfirmation executed in 12.648ms.
+2023-04-20 22:21:00.002 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop) in 28.3301ms
+2023-04-20 22:21:00.002 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop)'
+2023-04-20 22:21:00.002 +07:00 [INF] HTTP GET /Cart/OrderConfirmation responded 200 in 30.8022 ms
+2023-04-20 22:21:00.005 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/OrderConfirmation - - - 200 - text/html;+charset=utf-8 34.6104ms
+2023-04-20 22:21:00.172 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:21:00.172 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:21:00.173 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.3653ms
+2023-04-20 22:21:00.246 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 74.0182ms
+2023-04-20 22:21:04.186 +07:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Cart/OrderConfirmation application/x-www-form-urlencoded 182
+2023-04-20 22:21:04.187 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop)'
+2023-04-20 22:21:04.187 +07:00 [INF] Route matched with {action = "OrderConfirmation", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult OrderConfirmation() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:21:04.200 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+WHERE [p].[Id] = @__id_0
+2023-04-20 22:21:04.251 +07:00 [INF] Executing RedirectResult, redirecting to /.
+2023-04-20 22:21:04.251 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop) in 64.3612ms
+2023-04-20 22:21:04.251 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop)'
+2023-04-20 22:21:04.251 +07:00 [INF] HTTP POST /Cart/OrderConfirmation responded 302 in 64.6723 ms
+2023-04-20 22:21:04.251 +07:00 [INF] Request finished HTTP/2 POST https://localhost:5001/Cart/OrderConfirmation application/x-www-form-urlencoded 182 - 302 0 - 65.9541ms
+2023-04-20 22:21:04.257 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2023-04-20 22:21:04.260 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop)'
+2023-04-20 22:21:04.261 +07:00 [INF] Route matched with {action = "Index", controller = "Product"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Codecool.CodecoolShop.Controllers.ProductController (Codecool.CodecoolShop).
+2023-04-20 22:21:04.266 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+2023-04-20 22:21:04.268 +07:00 [INF] Executing ViewResult, running view Index.
+2023-04-20 22:21:04.280 +07:00 [INF] Executed ViewResult - view Index executed in 11.8248ms.
+2023-04-20 22:21:04.280 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop) in 19.0073ms
+2023-04-20 22:21:04.280 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop)'
+2023-04-20 22:21:04.280 +07:00 [INF] HTTP GET / responded 200 in 19.3947 ms
+2023-04-20 22:21:04.306 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - text/html;+charset=utf-8 49.5455ms
+2023-04-20 22:21:04.456 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:21:04.504 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:21:04.504 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.3989ms
+2023-04-20 22:21:04.572 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 115.8123ms
+2023-04-20 22:22:54.859 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2023-04-20 22:22:54.867 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop)'
+2023-04-20 22:22:54.869 +07:00 [INF] Route matched with {action = "Index", controller = "Product"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Codecool.CodecoolShop.Controllers.ProductController (Codecool.CodecoolShop).
+2023-04-20 22:22:54.883 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+2023-04-20 22:22:54.887 +07:00 [INF] Executing ViewResult, running view Index.
+2023-04-20 22:22:54.913 +07:00 [INF] Executed ViewResult - view Index executed in 26.5663ms.
+2023-04-20 22:22:54.913 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop) in 44.0301ms
+2023-04-20 22:22:54.913 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop)'
+2023-04-20 22:22:54.913 +07:00 [INF] HTTP GET / responded 200 in 46.1934 ms
+2023-04-20 22:22:54.972 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - text/html;+charset=utf-8 113.0123ms
+2023-04-20 22:22:55.622 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:22:55.649 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:22:55.649 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.2949ms
+2023-04-20 22:22:56.643 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 1021.6991ms
+2023-04-20 22:23:52.569 +07:00 [INF] Application Starting Up
+2023-04-20 22:23:55.518 +07:00 [INF] User profile is available. Using 'C:\Users\macie\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-04-20 22:23:58.525 +07:00 [WRN] No store type was specified for the decimal property 'DefaultPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2023-04-20 22:23:59.931 +07:00 [INF] Executed DbCommand (148ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2023-04-20 22:24:00.817 +07:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2023-04-20 22:24:01.138 +07:00 [INF] Now listening on: https://localhost:5001
+2023-04-20 22:24:01.138 +07:00 [INF] Now listening on: http://localhost:5000
+2023-04-20 22:24:01.144 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-20 22:24:01.145 +07:00 [INF] Hosting environment: Development
+2023-04-20 22:24:01.145 +07:00 [INF] Content root path: C:\Users\macie\source\repos\codecool-shop-1-csharp-MarcinSzkurlat\src\Codecool.CodecoolShop
+2023-04-20 22:24:02.325 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/ - -
+2023-04-20 22:24:02.459 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop)'
+2023-04-20 22:24:02.482 +07:00 [INF] Route matched with {action = "Index", controller = "Product"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Codecool.CodecoolShop.Controllers.ProductController (Codecool.CodecoolShop).
+2023-04-20 22:24:02.488 +07:00 [INF] Accessing expired session, Key:18755570-fb3a-45d9-1206-b48add4f5602
+2023-04-20 22:24:02.785 +07:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+2023-04-20 22:24:02.998 +07:00 [INF] Executing ViewResult, running view Index.
+2023-04-20 22:24:03.362 +07:00 [INF] Executed ViewResult - view Index executed in 364.4653ms.
+2023-04-20 22:24:03.371 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop) in 888.5178ms
+2023-04-20 22:24:03.373 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.ProductController.Index (Codecool.CodecoolShop)'
+2023-04-20 22:24:03.379 +07:00 [INF] HTTP GET / responded 200 in 985.6847 ms
+2023-04-20 22:24:03.384 +07:00 [INF] Session started; Key:18755570-fb3a-45d9-1206-b48add4f5602, Id:d93b550d-0377-effd-d708-e88b5e60460d
+2023-04-20 22:24:03.556 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/ - - - 200 - text/html;+charset=utf-8 1232.0285ms
+2023-04-20 22:24:03.630 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/lib/bootstrap/dist/css/bootstrap.min.css - -
+2023-04-20 22:24:03.664 +07:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Users\macie\source\repos\codecool-shop-1-csharp-MarcinSzkurlat\src\Codecool.CodecoolShop\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2023-04-20 22:24:03.665 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/lib/bootstrap/dist/css/bootstrap.min.css - - - 0 155764 text/css 34.8034ms
+2023-04-20 22:24:03.669 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:24:03.847 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:24:03.867 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 20.1936ms
+2023-04-20 22:24:03.983 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 313.9813ms
+2023-04-20 22:24:06.636 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/AddToCart?productId=102 - -
+2023-04-20 22:24:06.647 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.AddToCart (Codecool.CodecoolShop)'
+2023-04-20 22:24:06.671 +07:00 [INF] Route matched with {action = "AddToCart", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddToCart(Int32) on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:24:06.877 +07:00 [INF] Executing RedirectResult, redirecting to /Cart/ViewCart.
+2023-04-20 22:24:06.877 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.AddToCart (Codecool.CodecoolShop) in 205.5238ms
+2023-04-20 22:24:06.877 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.AddToCart (Codecool.CodecoolShop)'
+2023-04-20 22:24:06.877 +07:00 [INF] HTTP GET /Cart/AddToCart responded 302 in 234.4155 ms
+2023-04-20 22:24:06.878 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/AddToCart?productId=102 - - - 302 0 - 241.4976ms
+2023-04-20 22:24:06.885 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/ViewCart - -
+2023-04-20 22:24:06.890 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.ViewCart (Codecool.CodecoolShop)'
+2023-04-20 22:24:06.893 +07:00 [INF] Route matched with {action = "ViewCart", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ViewCart() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:24:07.089 +07:00 [INF] Executed DbCommand (55ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+WHERE [p].[Id] = @__id_0
+2023-04-20 22:24:07.092 +07:00 [INF] Executing ViewResult, running view ViewCart.
+2023-04-20 22:24:07.111 +07:00 [INF] Executed ViewResult - view ViewCart executed in 19.1813ms.
+2023-04-20 22:24:07.111 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.ViewCart (Codecool.CodecoolShop) in 217.9914ms
+2023-04-20 22:24:07.111 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.ViewCart (Codecool.CodecoolShop)'
+2023-04-20 22:24:07.111 +07:00 [INF] HTTP GET /Cart/ViewCart responded 200 in 224.1984 ms
+2023-04-20 22:24:07.114 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/ViewCart - - - 200 - text/html;+charset=utf-8 228.2597ms
+2023-04-20 22:24:07.210 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:24:07.210 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:24:07.210 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.4746ms
+2023-04-20 22:24:07.324 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 113.7174ms
+2023-04-20 22:24:08.711 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/Checkout - -
+2023-04-20 22:24:08.713 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop)'
+2023-04-20 22:24:08.715 +07:00 [INF] Route matched with {action = "Checkout", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Checkout() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:24:08.720 +07:00 [INF] Executing ViewResult, running view Checkout.
+2023-04-20 22:24:08.859 +07:00 [INF] Executed ViewResult - view Checkout executed in 141.8772ms.
+2023-04-20 22:24:08.859 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop) in 143.6297ms
+2023-04-20 22:24:08.859 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop)'
+2023-04-20 22:24:08.859 +07:00 [INF] HTTP GET /Cart/Checkout responded 200 in 146.3213 ms
+2023-04-20 22:24:08.862 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/Checkout - - - 200 - text/html;+charset=utf-8 152.1207ms
+2023-04-20 22:24:08.959 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:24:08.960 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:24:08.960 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.2796ms
+2023-04-20 22:24:09.067 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 108.0283ms
+2023-04-20 22:24:13.602 +07:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Cart/Checkout application/x-www-form-urlencoded 584
+2023-04-20 22:24:13.609 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop)'
+2023-04-20 22:24:13.618 +07:00 [INF] Route matched with {action = "Checkout", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Checkout(Codecool.CodecoolShop.Models.UserData.UserDataModel) on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:24:13.691 +07:00 [INF] {"Products":null,"UserData":{"Name":"Iris Rose","Email":"gukyviqo@mailinator.com","PhoneNumber":"+1 (956) 424-3592","BillingAddress":{"Country":"Labore libero beatae","City":"Qui ex obcaecati qui","Zipcode":"90560","Address":"Aut deleniti exercit","$type":"BillingAddressModel"},"ShippingAddress":{"Country":"Anim esse rem place","City":"Assumenda velit elit","Zipcode":"33693","Address":"Ratione quisquam mod","$type":"ShippingAddressModel"},"$type":"UserDataModel"},"Payment":null,"OrderStatus":"Received","OrderId":"9360e61d-e5cf-4c23-9425-6b32d230c805","OrderDateTime":"2023-04-20T15:24:13.6751924Z","$type":"OrderModel"}
+2023-04-20 22:24:13.692 +07:00 [INF] ______________________________________________________________________________
+2023-04-20 22:24:13.778 +07:00 [INF] Executing RedirectResult, redirecting to /Cart/Payment.
+2023-04-20 22:24:13.778 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop) in 160.0177ms
+2023-04-20 22:24:13.779 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Checkout (Codecool.CodecoolShop)'
+2023-04-20 22:24:13.779 +07:00 [INF] HTTP POST /Cart/Checkout responded 302 in 169.7211 ms
+2023-04-20 22:24:13.779 +07:00 [INF] Request finished HTTP/2 POST https://localhost:5001/Cart/Checkout application/x-www-form-urlencoded 584 - 302 0 - 176.9221ms
+2023-04-20 22:24:13.788 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/Payment - -
+2023-04-20 22:24:13.789 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:24:13.791 +07:00 [INF] Route matched with {action = "Payment", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Payment() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:24:13.793 +07:00 [INF] Executing ViewResult, running view Payment.
+2023-04-20 22:24:13.854 +07:00 [INF] Executed ViewResult - view Payment executed in 62.6234ms.
+2023-04-20 22:24:13.855 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop) in 63.2788ms
+2023-04-20 22:24:13.855 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:24:13.855 +07:00 [INF] HTTP GET /Cart/Payment responded 200 in 65.2221 ms
+2023-04-20 22:24:13.857 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/Payment - - - 200 - text/html;+charset=utf-8 69.3119ms
+2023-04-20 22:24:13.979 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:24:13.982 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:24:13.982 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.6918ms
+2023-04-20 22:24:14.134 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 155.2456ms
+2023-04-20 22:24:21.125 +07:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Cart/Payment application/x-www-form-urlencoded 290
+2023-04-20 22:24:21.126 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:24:21.128 +07:00 [INF] Route matched with {action = "Payment", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Payment(Codecool.CodecoolShop.Models.Payment.PaymentModel) on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:24:21.159 +07:00 [INF] Executing ViewResult, running view Payment.
+2023-04-20 22:24:21.195 +07:00 [INF] Executed ViewResult - view Payment executed in 36.0497ms.
+2023-04-20 22:24:21.196 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop) in 67.1963ms
+2023-04-20 22:24:21.196 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:24:21.196 +07:00 [INF] HTTP POST /Cart/Payment responded 200 in 70.0948 ms
+2023-04-20 22:24:21.198 +07:00 [INF] Request finished HTTP/2 POST https://localhost:5001/Cart/Payment application/x-www-form-urlencoded 290 - 200 - text/html;+charset=utf-8 73.9573ms
+2023-04-20 22:24:21.294 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:24:21.294 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:24:21.295 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.9366ms
+2023-04-20 22:24:21.383 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 87.8569ms
+2023-04-20 22:24:28.196 +07:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Cart/Payment application/x-www-form-urlencoded 288
+2023-04-20 22:24:28.197 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:24:28.198 +07:00 [INF] Route matched with {action = "Payment", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Payment(Codecool.CodecoolShop.Models.Payment.PaymentModel) on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:24:28.295 +07:00 [INF] Executing RedirectResult, redirecting to /Cart/OrderConfirmation.
+2023-04-20 22:24:28.295 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop) in 97.4117ms
+2023-04-20 22:24:28.295 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.Payment (Codecool.CodecoolShop)'
+2023-04-20 22:24:28.295 +07:00 [INF] HTTP POST /Cart/Payment responded 302 in 97.8455 ms
+2023-04-20 22:24:28.295 +07:00 [INF] Request finished HTTP/2 POST https://localhost:5001/Cart/Payment application/x-www-form-urlencoded 288 - 302 0 - 99.4856ms
+2023-04-20 22:24:28.301 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Cart/OrderConfirmation - -
+2023-04-20 22:24:28.302 +07:00 [INF] Executing endpoint 'Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop)'
+2023-04-20 22:24:28.303 +07:00 [INF] Route matched with {action = "OrderConfirmation", controller = "Cart"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult OrderConfirmation() on controller Codecool.CodecoolShop.Controllers.CartController (Codecool.CodecoolShop).
+2023-04-20 22:24:28.313 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[Currency], [p].[DefaultPrice], [p].[Description], [p].[Image], [p].[Name], [p].[ProductCategory], [p].[SupplierId], [s].[Id], [s].[Description], [s].[Name]
+FROM [Products] AS [p]
+LEFT JOIN [Suppliers] AS [s] ON [p].[SupplierId] = [s].[Id]
+WHERE [p].[Id] = @__id_0
+2023-04-20 22:24:28.320 +07:00 [INF] Executing ViewResult, running view OrderConfirmation.
+2023-04-20 22:24:28.333 +07:00 [INF] Executed ViewResult - view OrderConfirmation executed in 13.4188ms.
+2023-04-20 22:24:28.333 +07:00 [INF] Executed action Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop) in 30.0759ms
+2023-04-20 22:24:28.333 +07:00 [INF] Executed endpoint 'Codecool.CodecoolShop.Controllers.CartController.OrderConfirmation (Codecool.CodecoolShop)'
+2023-04-20 22:24:28.333 +07:00 [INF] HTTP GET /Cart/OrderConfirmation responded 200 in 31.5829 ms
+2023-04-20 22:24:28.335 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/Cart/OrderConfirmation - - - 200 - text/html;+charset=utf-8 34.3695ms
+2023-04-20 22:24:28.413 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - -
+2023-04-20 22:24:28.415 +07:00 [INF] Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2023-04-20 22:24:28.416 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12012 application/javascript;+charset=utf-8 0.3389ms
+2023-04-20 22:24:28.547 +07:00 [INF] Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 133.9496ms

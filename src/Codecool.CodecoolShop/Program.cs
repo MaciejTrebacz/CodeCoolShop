@@ -19,7 +19,7 @@ namespace Codecool.CodecoolShop
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
-            
+
             try
             {
                 Log.Information("Application Starting Up");

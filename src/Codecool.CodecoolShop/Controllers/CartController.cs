@@ -29,6 +29,7 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly IMapper _mapper;
         private ILogger? Logger;
         private readonly ILogger<CartController> cartLogger;
+        private readonly ShoppingCartLogic _shoppingCartLogic;
 
 
         public CartController(ILogger<ProductController> logger, ProductService productService, IMapper mapper, ILogger<CartController> cartLogger)
@@ -37,12 +38,13 @@ namespace Codecool.CodecoolShop.Controllers
             _productService = productService;
             _mapper = mapper;
             this.cartLogger = cartLogger;
+            _shoppingCartLogic = new ShoppingCartLogic();
         }
 
         public IActionResult ViewCart()
         {
             
-            var cart = GetCart();
+            var cart = _shoppingCartLogic.GetCart(HttpContext);
             var productIds = cart.Items.Keys.ToList();
             var products = productIds.Select(productId => _productService.GetProductById(productId)).ToList();
 
@@ -57,35 +59,11 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult AddToCart(int productId)
         {
-            var cart = GetCart();
+            var cart = _shoppingCartLogic.GetCart(HttpContext);
             cart.Items.TryGetValue(productId, out var currentCount);
             cart.Items[productId] = currentCount + 1;
-            SaveCart(cart);
+            _shoppingCartLogic.SaveCart(cart, HttpContext);
             return RedirectToAction("ViewCart");
-        }
-
-        public ShoppingCart GetCart()
-        {
-            ShoppingCart cart;
-            if (HttpContext.Session.Get("Cart") != null)
-            {
-                Debug.WriteLine("Found existing cart");
-                cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
-            }
-            else
-            {
-                Debug.WriteLine("Created new cart");
-                cart = new ShoppingCart();
-                SaveCart(cart);
-            }
-
-            return cart;
-        }
-
-        public void SaveCart(ShoppingCart cart)
-        {
-            Debug.WriteLine("Saved cart");
-            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
         }
 
         public IActionResult Checkout()

@@ -19,17 +19,19 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ILogger<ProductController> _logger;
         private readonly ProductService _productService;
         private readonly SupplierService _supplierService;
+        private readonly ShoppingCartLogic _shoppingCartLogic;
 
         public ProductController(ILogger<ProductController> logger, ProductService productService, SupplierService supplierService)
         {
             _logger = logger;
             _productService = productService;
             _supplierService = supplierService;
+            _shoppingCartLogic = new ShoppingCartLogic();
         }
 
         public IActionResult Index()
         {
-            var cart = GetCart();
+            var cart = _shoppingCartLogic.GetCart(HttpContext);
             var model = _productService.GetProducts();
             return View(model);
         }
@@ -50,30 +52,6 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        private ShoppingCart GetCart()
-        {
-            ShoppingCart cart;
-            if (HttpContext.Session.Get("Cart") != null)
-            {
-                Debug.WriteLine("Found existing cart");
-                cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
-            }
-            else
-            {
-                Debug.WriteLine("Created new cart");
-                cart = new ShoppingCart();
-                SaveCart(cart);
-            }
-
-            return cart;
-        }
-
-        private void SaveCart(ShoppingCart cart)
-        {
-            Debug.WriteLine("Saved cart");
-            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
         }
 
         public IActionResult Sort()

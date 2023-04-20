@@ -1,4 +1,3 @@
-using AutoMapper;
 using Codecool.CodecoolShop.Logic;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Models.Products;
@@ -40,6 +39,12 @@ namespace Codecool.CodecoolShop.Controllers
             return View();
         }
 
+        [Route("Product/{productId}/Details")]
+        public IActionResult Details(int productId)
+        {
+            var product = _productService.GetProductById(productId);
+            return View(product);
+        }
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

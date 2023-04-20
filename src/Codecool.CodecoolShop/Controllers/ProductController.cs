@@ -28,15 +28,24 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ProductService _productService;
         private readonly SupplierService _supplierService;
 
-        public ProductController(ILogger<ProductController> logger, ProductService productService, SupplierService supplierService)
+        public ProductController(ILogger<ProductController> logger, ProductService productService,
+            SupplierService supplierService)
         {
             _logger = logger;
             _productService = productService;
             _supplierService = supplierService;
         }
 
+
+
+        public void OneGet()
+        {
+            _logger.LogInformation("__________________________________________________________________________");
+        }
+
         public IActionResult Index()
         {
+            OneGet();
             var cart = GetCart();
             var model = _productService.GetProducts();
             return View(model);

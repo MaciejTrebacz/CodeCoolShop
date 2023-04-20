@@ -34,8 +34,16 @@ namespace Codecool.CodecoolShop.Controllers
             _mapper = mapper;
         }
 
+
+
+        public void OneGet()
+        {
+            _logger.LogInformation("__________________________________________________________________________");
+        }
+
         public IActionResult Index()
         {
+            OneGet();
             var cart = GetCart();
             var model = _productService.GetProducts();
             return View(model);
@@ -138,15 +146,6 @@ namespace Codecool.CodecoolShop.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult AddToCart(int productId)
-        {
-            var cart = GetCart();
-            cart.Items.TryGetValue(productId, out var currentCount);
-            cart.Items[productId] = currentCount + 1;
-            SaveCart(cart);
-            return RedirectToAction("ViewCart");
-        }
-
         private ShoppingCart GetCart()
         {
             ShoppingCart cart;
@@ -223,21 +222,6 @@ namespace Codecool.CodecoolShop.Controllers
         public async Task<IActionResult> SortBySupplier()
         {
             return View();
-        }
-
-        public IActionResult ViewCart()
-        {
-            var cart = GetCart();
-            var productIds = cart.Items.Keys.ToList();
-            var products = productIds.Select(productId => _productService.GetProduct(productId)).ToList();
-
-            var model = new CartViewModel
-            {
-                Cart = cart,
-                Products = products
-            };
-
-            return View(model);
         }
     }
 }

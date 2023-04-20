@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Codecool.CodecoolShop.Models.NewFolder
+namespace Codecool.CodecoolShop.Models.Products
 {
     public class ProductsCart
     {

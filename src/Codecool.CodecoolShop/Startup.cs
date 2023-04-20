@@ -1,4 +1,5 @@
 using Codecool.CodecoolShop.Data;
+using Codecool.CodecoolShop.Mappings;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace Codecool.CodecoolShop
             services.AddScoped<SupplierService>();
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddAutoMapper(typeof(ProductMappingProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

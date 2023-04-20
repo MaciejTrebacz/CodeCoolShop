@@ -3,6 +3,11 @@
     ViewData["Title"] = "Shopping Cart";
 }
 
+@section Scripts
+{ 
+    <script type="text/javascript" src="~/js/cart.js"></script>
+}
+
 @model CartViewModel
 
 <h1>Shopping Cart</h1>
@@ -20,10 +25,10 @@
         {
             <tr>
                 <td>@element.Name</td>
-                <td>@Model.Cart.Items[element.Id]</td>
-                <td>@element.DefaultPrice</td>
+                <td><input type="number" value="@Model.Cart.Items[element.Id]" class="form-control" min="0" oninput="this.value = Math.abs(this.value)" onchange="testFunc(event)" data-id="@element.Id"/></td>
+                <td id="price-@element.Id">@element.DefaultPrice</td>
                 <td>@element.Currency</td>
-                <td>@(element.DefaultPrice * Model.Cart.Items[element.Id])</td>
+                <td id="subtotal-@element.Id">@(element.DefaultPrice * Model.Cart.Items[element.Id])</td>
             </tr>
         }
     }
@@ -36,9 +41,8 @@
     <tr>
         <td colspan="3"></td>
         <th>Total price</th>
-        <td>@Model.Products.Sum(product => product.DefaultPrice * Model.Cart.Items[product.Id])</td>
+        <td id="totalPrice">@Model.Products.Sum(product => product.DefaultPrice * Model.Cart.Items[product.Id])</td>
     </tr>
 </table>
-<a><i class="bi bi-arrow-up text-primary"></i></a>
 <a type="button" class="btn btn-primary float-right @(Model.Products.Count == 0 ? "disabled" : "")" asp-controller="Product" asp-action="Index">Checkout</a>
 

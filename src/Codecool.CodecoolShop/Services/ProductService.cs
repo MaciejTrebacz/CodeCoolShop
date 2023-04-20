@@ -38,10 +38,11 @@ namespace Codecool.CodecoolShop.Services
             return products;
         }
 
-        public Product GetProduct(int id)
+        public Product GetProductById(int id)
         {
             return _dbContext.Products
-                .Include(product => product.Supplier).First(product => product.Id == id);
+                .Include(product => product.Supplier)
+                .First(product => product.Id == id);
         }
     }
 }

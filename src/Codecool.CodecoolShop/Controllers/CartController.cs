@@ -41,7 +41,7 @@ namespace Codecool.CodecoolShop.Controllers
         {
             var cart = GetCart();
             var productIds = cart.Items.Keys.ToList();
-            var products = productIds.Select(productId => _productService.GetProduct(productId)).ToList();
+            var products = productIds.Select(productId => _productService.GetProductById(productId)).ToList();
 
             var model = new CartViewModel
             {

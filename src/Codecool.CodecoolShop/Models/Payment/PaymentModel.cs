@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Codecool.CodecoolShop.CustomValidation.Payment;
 
 namespace Codecool.CodecoolShop.Models.Payment
 {
@@ -13,6 +14,7 @@ namespace Codecool.CodecoolShop.Models.Payment
         [Required]
         public string CardHolder { get; set; }
         [Required]
+        [ExpiryDateValidation(ErrorMessage = "Wrong expiry date")]
         public DateTime ExpiryDate { get; set; }
         [Required]
         [StringLength(3, MinimumLength = 3)]

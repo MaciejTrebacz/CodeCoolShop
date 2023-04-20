@@ -1,15 +1,20 @@
-﻿using System.IO;
-using System.Text.Json;
+﻿using Newtonsoft.Json;
+using System.IO;
 
 namespace Codecool.CodecoolShop.Services
 {
     public class SaveToFile
     {
-        public static void ToJson(object obj, string path, string fileName)
+        public static void ToJson(object obj, string path)
         {
-            string jsonString = JsonSerializer.Serialize(obj);
-            path = path + fileName + ".json";
-            File.WriteAllText(path, jsonString);
+            if (!File.Exists(path))
+            {
+                using (var file = File.CreateText(path))
+                {
+                    var json = JsonConvert.SerializeObject(obj, Formatting.Indented);
+                    file.Write(json);
+                }
+            }
         }
     }
 }

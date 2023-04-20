@@ -1,4 +1,3 @@
-using System;
 using Codecool.CodecoolShop.Logic;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Models.Payment;
@@ -6,17 +5,15 @@ using Codecool.CodecoolShop.Models.UserData;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Codecool.CodecoolShop.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using Codecool.CodecoolShop.Models.DTO;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
@@ -27,13 +24,14 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ILogger<ProductController> _logger;
         private readonly ProductService _productService;
         private readonly SupplierService _supplierService;
+        private readonly IMapper _mapper;
 
-        public ProductController(ILogger<ProductController> logger, ProductService productService,
-            SupplierService supplierService)
+        public ProductController(ILogger<ProductController> logger, ProductService productService, SupplierService supplierService, IMapper mapper)
         {
             _logger = logger;
             _productService = productService;
             _supplierService = supplierService;
+            _mapper = mapper;
         }
 
 
@@ -58,7 +56,14 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult CheckoutCart()
         {
-            return View();
+            var cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
+
+            if (cart.Items.Count == 0) return StatusCode(403);
+            if (HttpContext.Session.Get("UserData") == null) return View();
+
+            var userData = JsonSerializer.Deserialize<UserDataModel>(HttpContext.Session.Get("UserData"));
+
+            return View(userData);
         }
 
         [HttpPost]
@@ -76,6 +81,8 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Payment()
         {
+            if (HttpContext.Session.Get("UserData") == null) return StatusCode(403);
+
             return View();
         }
 
@@ -94,6 +101,9 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult OrderConfirmation()
         {
+            if (HttpContext.Session.Get("UserData") == null
+                || HttpContext.Session.Get("Payment") == null) return StatusCode(403);
+
             var cart = JsonSerializer.Deserialize<ShoppingCart>(HttpContext.Session.Get("Cart"));
 
             var order = new OrderModel()
@@ -106,11 +116,24 @@ namespace Codecool.CodecoolShop.Controllers
             if (Request.Method == "POST")
             {
                 HttpContext.Session.Clear();
-                var filePath = AppDomain.CurrentDomain.BaseDirectory + "\\orders\\";
-                var fileName = $"{cart.Id}_{DateTime.UtcNow}";
-                //TODO save to JSON file
-                //SaveToFile.ToJson(order, filePath, fileName);
+
+                var productsDto = _mapper.Map<List<ProductDto>>(order.Products.Products);
+                productsDto.ForEach(x => x.Subtotal = x.PricePerUnit * x.Quantity);
+
+                var jsonOrder = new OrderToFileModel()
+                {
+                    Payment = order.Payment,
+                    UserData = order.UserData,
+                    Products = productsDto
+                };
+
+                string filePath =
+                    $"{AppDomain.CurrentDomain.BaseDirectory}\\orders\\{cart.Id}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.json";
+
+                SaveToFile.ToJson(jsonOrder, filePath);
+
                 //TODO send email to user about order
+
                 return RedirectToAction("Index");
             }
 

@@ -27,7 +27,6 @@ namespace Codecool.CodecoolShop.Controllers
         private ILogger<ProductController> _logger;
         private readonly ProductService _productService;
         private readonly IMapper _mapper;
-        private ILogger? Logger;
         private readonly ILogger<CartController> cartLogger;
         private readonly ShoppingCartLogic _shoppingCartLogic;
 
@@ -170,7 +169,7 @@ namespace Codecool.CodecoolShop.Controllers
                 string filePath =
                     $"{AppDomain.CurrentDomain.BaseDirectory}\\orders\\{cart.Id}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.json";
 
-                //SaveToFile.ToJson(jsonOrder, filePath);
+                SaveToFile.ToJson(jsonOrder, filePath);
 
                 //TODO send email to user about order
 

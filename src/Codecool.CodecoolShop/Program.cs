@@ -16,12 +16,7 @@ namespace Codecool.CodecoolShop
     {
         public static void Main(string[] args)
         {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
             var newGuid = Guid.NewGuid();
-
-
             FilePath.Path = Path.Combine(Environment.CurrentDirectory, "Data", "Log", $"{newGuid}.json");
 
             Log.Logger = new LoggerConfiguration()
@@ -31,9 +26,6 @@ namespace Codecool.CodecoolShop
                 .WriteTo.File(new JsonFormatter(), FilePath.Path)
                 .Filter.ByIncludingOnly(evt => evt.Properties.ContainsKey("SourceContext") && evt.Properties["SourceContext"].ToString().Contains("CartController"))
                 .CreateLogger();
-
-
-
 
             try
             {

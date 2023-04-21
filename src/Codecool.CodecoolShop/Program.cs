@@ -33,7 +33,6 @@ namespace Codecool.CodecoolShop
                 .CreateLogger();
 
 
-            Log.Information(FilePath.Path);
 
 
             try
